@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://cyyimidsv35gu"]
+
+[ext_resource type="Script" uid="uid://cs8jnx1yrah5e" path="res://Scripts/Actors/Interface/item_text.gd" id="1_lrl0q"]
+
+[sub_resource type="Animation" id="Animation_lrl0q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:label_settings:outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eyi6v"]
+resource_name = "text_color"
+length = 0.66667003476955
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:label_settings:outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.50000006, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrl0q"]
+_data = {
+&"RESET": SubResource("Animation_lrl0q"),
+&"text_color": SubResource("Animation_eyi6v")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgfun"]
+outline_size = 2
+outline_color = Color(1, 0, 0, 1)
+
+[node name="ItemText" type="Node2D" unique_id=304469316]
+z_index = 1
+script = ExtResource("1_lrl0q")
+speed = 16.0
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=2099494276]
+wait_time = 2.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1742696497]
+libraries/ = SubResource("AnimationLibrary_lrl0q")
+autoplay = &"text_color"
+
+[node name="Text" type="Label" parent="." unique_id=763065545]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -24)
+text = "TESTE"
+label_settings = SubResource("LabelSettings_lgfun")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
