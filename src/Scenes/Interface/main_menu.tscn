@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cbn5bm26860hm"]
+
+[ext_resource type="Script" uid="uid://bebqhrd7xjfyr" path="res://Scripts/Interface/main_menu.gd" id="1_o6dfy"]
+
+[node name="MainMenu" type="Control" unique_id=747042455]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_o6dfy")
+
+[node name="Text" type="Label" parent="." unique_id=1835897401]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 162.0
+offset_right = 315.0
+offset_bottom = 175.0
+size_flags_horizontal = 4
+text = "Projeto ainda em desenvolvimento."
+
+[node name="TitleScreen" type="VBoxContainer" parent="." unique_id=506574719]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TITLE" type="Label" parent="TitleScreen" unique_id=1269020292]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME PROJECT"
+
+[node name="Buttons" type="VBoxContainer" parent="TitleScreen" unique_id=1313157565]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Start" type="Button" parent="TitleScreen/Buttons" unique_id=271925852]
+layout_mode = 2
+text = "START"
+
+[node name="Options" type="Button" parent="TitleScreen/Buttons" unique_id=32030621]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="Exit" type="Button" parent="TitleScreen/Buttons" unique_id=1700057272]
+layout_mode = 2
+text = "EXIT"
+
+[connection signal="pressed" from="TitleScreen/Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="TitleScreen/Buttons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="TitleScreen/Buttons/Exit" to="." method="_on_exit_pressed"]
