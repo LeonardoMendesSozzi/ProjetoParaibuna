@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStats" format=3 uid="uid://dd24gskx7kblc"]
+
+[ext_resource type="Script" uid="uid://bicres02bhkrd" path="res://Scripts/Resources/item_stats.gd" id="1_pfrf0"]
+[ext_resource type="Texture2D" uid="uid://i8lvekpvm1jg" path="res://Assets/Items/Life.png" id="2_tjk1f"]
+
+[resource]
+script = ExtResource("1_pfrf0")
+texture = ExtResource("2_tjk1f")
+item_type = 3
+metadata/_custom_type_script = "uid://bicres02bhkrd"

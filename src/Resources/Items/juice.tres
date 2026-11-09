@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item_Stats" format=3 uid="uid://igl8xf24kho0"]
+
+[ext_resource type="Script" uid="uid://bicres02bhkrd" path="res://Scripts/Resources/item_stats.gd" id="1_8c0l4"]
+[ext_resource type="Texture2D" uid="uid://cpxtru8818bxk" path="res://Assets/Items/Juice.png" id="2_212px"]
+
+[resource]
+script = ExtResource("1_8c0l4")
+texture = ExtResource("2_212px")
+points = 400
+metadata/_custom_type_script = "uid://bicres02bhkrd"

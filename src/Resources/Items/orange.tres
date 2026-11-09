@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item_Stats" format=3 uid="uid://8jumhi44agup"]
+
+[ext_resource type="Script" uid="uid://bicres02bhkrd" path="res://Scripts/Resources/item_stats.gd" id="1_iguh8"]
+[ext_resource type="Texture2D" uid="uid://s5b1dg0ov2w5" path="res://Assets/Items/Orange.png" id="2_cf8id"]
+
+[resource]
+script = ExtResource("1_iguh8")
+texture = ExtResource("2_cf8id")
+points = 200
+metadata/_custom_type_script = "uid://bicres02bhkrd"
