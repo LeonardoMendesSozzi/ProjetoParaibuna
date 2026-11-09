@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cmgqyo73gkojl"]
+
+[ext_resource type="Script" uid="uid://cc1tk6v4o27m8" path="res://Scripts/Actors/Objects/item.gd" id="1_owpul"]
+[ext_resource type="Texture2D" uid="uid://8vh7tf0hy2fm" path="res://Assets/Shadows/Item Shadow.png" id="2_owpul"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnec3"]
+size = Vector2(8, 12)
+
+[node name="Item" type="Area2D" unique_id=1348913271]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_owpul")
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1263180092]
+modulate = Color(1, 1, 1, 0.49803922)
+texture = ExtResource("2_owpul")
+centered = false
+offset = Vector2(-12, -12)
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1686200726]
+shape = SubResource("RectangleShape2D_bnec3")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1013924569]
+centered = false
+offset = Vector2(-12, -20)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
