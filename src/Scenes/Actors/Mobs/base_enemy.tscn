@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://rw40fjpqn5v3"]
+
+[ext_resource type="Script" uid="uid://dff1j7gk8i8ys" path="res://Scripts/Actors/Mobs/base_enemy.gd" id="1_xhl43"]
+[ext_resource type="Texture2D" uid="uid://8vh7tf0hy2fm" path="res://Assets/Shadows/Item Shadow.png" id="2_6u3uu"]
+[ext_resource type="Texture2D" uid="uid://cqq4g2cmfq31" path="res://icon.svg" id="3_6wsml"]
+
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=811867907 groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_xhl43")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=336565505]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=454708280]
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=831706378]
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=2034165398]
+modulate = Color(1, 1, 1, 0.49803922)
+texture = ExtResource("2_6u3uu")
+centered = false
+offset = Vector2(-12, -12)
+
+[node name="SpriteContainer" type="Node2D" parent="." unique_id=737273380]
+
+[node name="Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=160403351]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_6wsml")
+centered = false
+offset = Vector2(-64, -128)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1012273793]
+
+[node name="Collision" type="CollisionShape2D" parent="DetectionArea" unique_id=138994990]
+
+[node name="TargetArea" type="Area2D" parent="." unique_id=1553597936]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="TargetArea" unique_id=1200970273]
+
+[node name="AttackAreaLeft" type="Area2D" parent="." unique_id=804726806]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="Collision" type="CollisionShape2D" parent="AttackAreaLeft" unique_id=329418193]
+
+[node name="AttackAreaRight" type="Area2D" parent="." unique_id=896728876]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="Collision" type="CollisionShape2D" parent="AttackAreaRight" unique_id=214217559]
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="area_entered" from="TargetArea" to="." method="_on_target_area_area_entered"]
+[connection signal="area_exited" from="TargetArea" to="." method="_on_target_area_area_exited"]
+[connection signal="area_entered" from="AttackAreaLeft" to="." method="_on_attack_area_left_area_entered"]
+[connection signal="area_entered" from="AttackAreaRight" to="." method="_on_attack_area_right_area_entered"]
