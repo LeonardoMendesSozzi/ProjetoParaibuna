@@ -1,8 +1,8 @@
 extends Camera2D
 class_name PlayerCamera
 
-@export var min_pos: Vector2 = Vector2(-240.0, -10.0)
-@export var max_pos: Vector2 = Vector2(240.0, -10.0)
+@export var min_pos: Vector2 = Vector2(-40.0, -10.0)
+@export var max_pos: Vector2 = Vector2(40.0, -10.0)
 var player: Player
 
 func _process(_delta: float) -> void:

@@ -1,6 +1,9 @@
 extends Node2D
 class_name WorldScene
 
+var difficulty: float = 0.0
+var spawn_dir: Vector2 = Vector2.LEFT
+
 ### Cenas do Player
 @export var player_scene: PackedScene
 var player: Player
@@ -9,8 +12,24 @@ var player: Player
 @export var camera_scene: PackedScene
 var camera: PlayerCamera
 
-### Inimigos
+### Cenas de Inimigos
 @export var melee_scene: PackedScene
+
+### Cenas de Itens
+@export var prop_scene: PackedScene
+var item_array: Array[ItemStats] = [
+	null,
+	preload("res://Resources/Items/orange.tres"),
+	preload("res://Resources/Items/juice.tres"),
+	preload("res://Resources/Items/soda.tres"),
+	preload("res://Resources/Items/cake.tres"),
+	preload("res://Resources/Items/speed.tres"),
+	preload("res://Resources/Items/shield.tres"),
+	preload("res://Resources/Items/power.tres"),
+	preload("res://Resources/Items/life.tres")
+]
+var item_weights: Array[int] = [10,20,15,10,5,15,10,10,5]
+var item_rng = RandomNumberGenerator.new()
 
 # Outras cenas
 @onready var actors_container: Node2D = $ActorsContainer
@@ -20,7 +39,8 @@ var camera: PlayerCamera
 func _ready() -> void:
 	spawn_player()
 	spawn_camera()
-	spawn_enemies()
+	for i in 2:
+		spawn_enemies()
 	## TODO Uma forma de spawnar hordas de inimigos e objetos de forma estruturada
 
 
@@ -56,27 +76,24 @@ func spawn_enemies() -> void:
 		print("Erro, cena com inimigos não definida!")
 		return
 	
-	return
+	difficulty += 0.20
 	
-	for i: int in 5:
+	# Spawn ds primeiros inimigos
+	for i: int in 1 + int(difficulty):
 		var new_enemy: MeleeEnemy = melee_scene.instantiate()
 		
-		new_enemy.global_position = Vector2(randf_range(0, 300), randf_range(0, 80))
-		
+		new_enemy.global_position = Vector2(200.0 * spawn_dir.x,randf_range(0.0, 80.0))
 		new_enemy.world = self
 		new_enemy.player = player
-
-		actors_container.add_child(new_enemy)
-	
-	for i: int in 5:
-		var new_enemy: MeleeEnemy = melee_scene.instantiate()
+		new_enemy.connect("spawn_melee_enemy", spawn_enemies)
 		
-		new_enemy.global_position = Vector2(randf_range(500, 800), randf_range(0, 80))
-		
-		new_enemy.world = self
-		new_enemy.player = player
-
 		actors_container.add_child(new_enemy)
+		
+		spawn_dir.x *= (-1)
+
+func get_item() -> ItemStats:
+	var item := item_rng.rand_weighted(item_weights)
+	return item_array[item]
 
 func exit_game() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Interface/main_menu.tscn")
@@ -89,3 +106,15 @@ func player_spawn_text(text: ItemText) -> void:
 
 func player_spawn_projectile(proj: PlayerProjectile) -> void:
 	actors_container.add_child(proj)
+
+### Sinais
+func _on_item_spawner_timeout() -> void:
+	if prop_scene == null:
+		return
+	
+	var new_prop: Prop = prop_scene.instantiate()
+	
+	new_prop.global_position = Vector2(240.0, randf_range(10.0, 70.0))
+	new_prop.item_stats = get_item()
+	
+	actors_container.add_child(new_prop)

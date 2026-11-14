@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://d33wc68dgphs1"]
+
+[ext_resource type="Texture2D" uid="uid://cqq4g2cmfq31" path="res://icon.svg" id="1_7odra"]
+[ext_resource type="Texture2D" uid="uid://ljsu0dcgfko3" path="res://Assets/Stages/Test/Foreground.png" id="2_7njmv"]
+[ext_resource type="Texture2D" uid="uid://c6uws34nq87w1" path="res://Assets/Stages/Test/Background_2.png" id="2_f657j"]
+[ext_resource type="Texture2D" uid="uid://nvo171wchwfq" path="res://Assets/Stages/Test/Water.png" id="2_lc17f"]
+[ext_resource type="Texture2D" uid="uid://c6lpmslrpjivb" path="res://Assets/Stages/Test/Background_1.png" id="2_wlodj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7odra"]
+size = Vector2(800, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7njmv"]
+size = Vector2(40, 254)
+
+[node name="Stage" type="Node2D" unique_id=374889808]
+
+[node name="Scenery" type="Node2D" parent="." unique_id=1868534491]
+
+[node name="Water1" type="Parallax2D" parent="Scenery" unique_id=679415647]
+repeat_size = Vector2(144, 0)
+autoscroll = Vector2(-240, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Scenery/Water1" unique_id=1777940068]
+texture = ExtResource("2_lc17f")
+centered = false
+offset = Vector2(144, -10)
+
+[node name="Water2" type="Parallax2D" parent="Scenery" unique_id=1994378032]
+scroll_scale = Vector2(1.025, 1)
+repeat_size = Vector2(144, 0)
+autoscroll = Vector2(-240, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Scenery/Water2" unique_id=462183196]
+texture = ExtResource("2_lc17f")
+centered = false
+offset = Vector2(140, 10)
+
+[node name="Water3" type="Parallax2D" parent="Scenery" unique_id=517682089]
+scroll_scale = Vector2(1.05, 1)
+repeat_size = Vector2(144, 0)
+autoscroll = Vector2(-240, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Scenery/Water3" unique_id=1877821240]
+texture = ExtResource("2_lc17f")
+centered = false
+offset = Vector2(136, 30)
+
+[node name="Water4" type="Parallax2D" parent="Scenery" unique_id=431352664]
+scroll_scale = Vector2(1.075, 1)
+repeat_size = Vector2(144, 0)
+autoscroll = Vector2(-240, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Scenery/Water4" unique_id=471685741]
+texture = ExtResource("2_lc17f")
+centered = false
+offset = Vector2(132, 50)
+
+[node name="Background3(Apagar)" type="Parallax2D" parent="." unique_id=2068780939]
+repeat_size = Vector2(240, 0)
+autoscroll = Vector2(-120, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Background3(Apagar)" unique_id=2009163238]
+modulate = Color(1, 1, 1, 0.5882353)
+texture = ExtResource("2_f657j")
+centered = false
+offset = Vector2(240, -100)
+flip_h = true
+
+[node name="Background2" type="Parallax2D" parent="." unique_id=2100471458]
+repeat_size = Vector2(240, 0)
+autoscroll = Vector2(-160, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Background2" unique_id=883162268]
+texture = ExtResource("2_f657j")
+centered = false
+offset = Vector2(240, -120)
+
+[node name="Background1" type="Parallax2D" parent="." unique_id=1238799267]
+repeat_size = Vector2(240, 0)
+autoscroll = Vector2(-200, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Background1" unique_id=1126846315]
+texture = ExtResource("2_wlodj")
+centered = false
+offset = Vector2(240, -72)
+
+[node name="Foreground" type="Parallax2D" parent="." unique_id=475725715]
+repeat_size = Vector2(120, 0)
+autoscroll = Vector2(-300, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Foreground" unique_id=857660360]
+z_index = 1
+position = Vector2(0, 56)
+texture = ExtResource("2_7njmv")
+offset = Vector2(180, 12)
+
+[node name="Backgrounds" type="Node2D" parent="." unique_id=1547165165]
+position = Vector2(-5, -232)
+
+[node name="Background" type="Sprite2D" parent="Backgrounds" unique_id=410647155]
+visible = false
+position = Vector2(5, 0)
+scale = Vector2(6.2499995, 1.8125001)
+texture = ExtResource("1_7odra")
+centered = false
+
+[node name="Water" type="Sprite2D" parent="Backgrounds" unique_id=1080843292]
+visible = false
+position = Vector2(5, 232)
+scale = Vector2(6.2499995, 0.62499994)
+texture = ExtResource("1_7odra")
+centered = false
+
+[node name="Foreground" type="Sprite2D" parent="Backgrounds" unique_id=1720377306]
+visible = false
+z_index = 1
+position = Vector2(5, 302)
+scale = Vector2(6.2499995, 1.8125001)
+texture = ExtResource("1_7odra")
+centered = false
+
+[node name="WorldColliders" type="Node2D" parent="." unique_id=916174696]
+
+[node name="TopWall" type="StaticBody2D" parent="WorldColliders" unique_id=147420150]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/TopWall" unique_id=900644406]
+position = Vector2(0, -42)
+shape = SubResource("RectangleShape2D_7odra")
+
+[node name="BottomWall" type="StaticBody2D" parent="WorldColliders" unique_id=2023890880]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/BottomWall" unique_id=222195900]
+position = Vector2(0, 112)
+shape = SubResource("RectangleShape2D_7odra")
+
+[node name="RightWall" type="StaticBody2D" parent="WorldColliders" unique_id=1778550664]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/RightWall" unique_id=408703096]
+position = Vector2(-220, 45)
+shape = SubResource("RectangleShape2D_7njmv")
+
+[node name="LeftWall" type="StaticBody2D" parent="WorldColliders" unique_id=765149390]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldColliders/LeftWall" unique_id=1285622441]
+position = Vector2(220, 45)
+shape = SubResource("RectangleShape2D_7njmv")

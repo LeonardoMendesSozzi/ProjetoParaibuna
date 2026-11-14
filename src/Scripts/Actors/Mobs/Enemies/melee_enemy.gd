@@ -22,6 +22,8 @@ var anim_map: Dictionary={
 	State.DEAD: "dead"
 }
 
+### Sinais
+signal spawn_melee_enemy()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -138,7 +140,8 @@ func if_no_health() -> void:
 
 func handle_dead() -> void:
 	## TODO Fazer a alteração dos pontos de forma mais indireta
-	player.add_points(400)
+	player.add_points(200)
+	emit_signal("spawn_melee_enemy")
 	queue_free()
 
 ### Sinais do Target Area

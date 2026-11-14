@@ -1,0 +1,12 @@
+res://Scenes/world.tscn
+res://Scripts/world.gd
+res://Scenes/Stages/stage.tscn
+res://Scripts/Interface/player_camera.gd
+res://Scripts/Actors/Mobs/player.gd
+res://Scripts/Actors/Mobs/Enemies/melee_enemy.gd
+res://Scripts/global.gd
+res://Scenes/Interface/main_menu.tscn
+res://Scripts/Interface/main_menu.gd
+res://Scenes/Actors/Objects/prop.tscn
+res://Scenes/Actors/Mobs/player.tscn
+res://Scenes/Interface/game_hud.tscn

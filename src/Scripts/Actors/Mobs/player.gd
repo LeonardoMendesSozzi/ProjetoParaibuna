@@ -82,6 +82,11 @@ var jump_available: bool = true
 @onready var left_muzzle: Marker2D = $MuzzleContainer/LeftMuzzle
 @onready var right_muzzle: Marker2D = $MuzzleContainer/RightMuzzle
 
+### Timer Invencibilidade
+@onready var damage_timer: Timer = $DamageTimer
+var is_invencible: bool = false
+@onready var invencible_animation: AnimationPlayer = $InvencibleAnimation
+
 # Nodos do texto de item coletado
 @export var text_scene: PackedScene
 
@@ -97,10 +102,10 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	handle_jump(delta)
 	handle_shoot(delta)
+	handle_invencibility()
 	if_no_health()
 	if_hurt()
 	handle_animation()
-	print(global_position)
 
 
 ### HANDLE
@@ -213,7 +218,20 @@ func if_hurt() -> void:
 		state = State.IDLE
 
 func handle_dead() -> void:
+	if points > Global.high_score:
+		Global.high_score = points
 	world.exit_game()
+
+func handle_invencibility() -> void:
+	if not is_invencible:
+		return
+	
+	if not damage_timer.is_stopped():
+		return
+	
+	if height == 0.0:
+		invencible_animation.play("invencible")
+		damage_timer.start()
 
 ### AÇÕES
 func jump_action() -> void:
@@ -299,11 +317,23 @@ func prepare_item_text(text: String) -> void:
 	emit_signal("spawn_item_text", new_text)
 
 func take_damage(dir: Vector2) -> void:
+	if is_invencible:
+		return
+	
+	power_up = false
+	
 	height_speed += dead_height
 	velocity = Vector2(dir.x * knockback_intensity, 0.0)
 	
+	is_invencible = true
+	
 	if shield:
 		shield = false
+		state = State.HURT
+		return
+	
+	if lifes > 0:
+		lifes -= 1
 		state = State.HURT
 		return
 	
@@ -337,3 +367,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_speed_up_timer_timeout() -> void:
 	speed_up = false
+
+func _on_damage_timer_timeout() -> void:
+	is_invencible = false
+	invencible_animation.stop()

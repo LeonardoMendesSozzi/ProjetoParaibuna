@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://damt0xqt8v8ir"]
 
 [ext_resource type="Script" uid="uid://c7irsulql1hty" path="res://Scripts/Interface/game hud.gd" id="1_ggn1j"]
-[ext_resource type="Texture2D" uid="uid://d1114fn7tx57a" path="res://Assets/Interface/ShootLeft.png" id="2_cdcrl"]
-[ext_resource type="Texture2D" uid="uid://bpltwttx2mikg" path="res://Assets/Interface/Jump.png" id="3_7d4xe"]
-[ext_resource type="Texture2D" uid="uid://1jg1kv8wwoj0" path="res://Assets/Interface/ShootRight.png" id="3_csbry"]
+[ext_resource type="Texture2D" uid="uid://ch2tu2fpf2u6y" path="res://Assets/Interface/ShootLeftUP.png" id="2_a6323"]
+[ext_resource type="Texture2D" uid="uid://cdp6pf8rrgk4t" path="res://Assets/Interface/ShootLeftDOWN.png" id="3_sob5w"]
+[ext_resource type="Texture2D" uid="uid://8xrtn503qh21" path="res://Assets/Interface/ShootRightUP.png" id="4_nlekf"]
+[ext_resource type="Texture2D" uid="uid://df2yfi64olm1e" path="res://Assets/Interface/ShootRightDOWN.png" id="5_adnjj"]
+[ext_resource type="Texture2D" uid="uid://dh355kmhsovws" path="res://Assets/Interface/JumpUP.png" id="6_6ospb"]
+[ext_resource type="Texture2D" uid="uid://cl3gkudx6tfog" path="res://Assets/Interface/JumpDOWN.png" id="7_qw6rn"]
 
 [node name="Game_HUD" type="CanvasLayer" unique_id=213666878]
 script = ExtResource("1_ggn1j")
@@ -36,16 +39,19 @@ action_up = &"Press_Up"
 action_down = &"Press_Down"
 
 [node name="ButtomShootLeft" type="TouchScreenButton" parent="." unique_id=2108984895]
-position = Vector2(216, 124)
-texture_normal = ExtResource("2_cdcrl")
+position = Vector2(221, 139)
+texture_normal = ExtResource("2_a6323")
+texture_pressed = ExtResource("3_sob5w")
 action = "Press_Shoot_Left"
 
 [node name="ButtomShootRight" type="TouchScreenButton" parent="." unique_id=220764469]
-position = Vector2(268, 84)
-texture_normal = ExtResource("3_csbry")
+position = Vector2(273, 99)
+texture_normal = ExtResource("4_nlekf")
+texture_pressed = ExtResource("5_adnjj")
 action = "Press_Shoot_Right"
 
 [node name="ButtomJump" type="TouchScreenButton" parent="." unique_id=278989752]
-position = Vector2(255, 120)
-texture_normal = ExtResource("3_7d4xe")
+position = Vector2(260, 135)
+texture_normal = ExtResource("6_6ospb")
+texture_pressed = ExtResource("7_qw6rn")
 action = "Press_Jump"

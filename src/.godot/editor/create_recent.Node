@@ -1,0 +1,15 @@
+AnimationPlayer
+Timer
+TouchScreenButton
+VirtualJoystick
+Node2D
+Sprite2D
+Parallax2D
+Prop
+ParallaxLayer
+Control
+HBoxContainer
+VBoxContainer
+Button
+WorldScene
+Label

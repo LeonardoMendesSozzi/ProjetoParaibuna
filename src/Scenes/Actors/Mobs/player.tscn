@@ -6,6 +6,44 @@
 [ext_resource type="Texture2D" uid="uid://bwj4mvup3t12p" path="res://Assets/MC/MC_Placeholder.png" id="3_qnmuq"]
 [ext_resource type="PackedScene" uid="uid://c3wbjgpd1cqtq" path="res://Scenes/Actors/Projectiles/player_projectile.tscn" id="7_4w8nx"]
 
+[sub_resource type="Animation" id="Animation_nkfg8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SpriteContainer/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_d3vxu"]
+resource_name = "invencible"
+length = 0.20000334376432
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SpriteContainer/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_okobp"]
+_data = {
+&"RESET": SubResource("Animation_nkfg8"),
+&"invencible": SubResource("Animation_d3vxu")
+}
+
 [sub_resource type="Animation" id="Animation_4w8nx"]
 length = 0.001
 tracks/0/type = "value"
@@ -173,6 +211,10 @@ script = ExtResource("1_nikbh")
 proj_scene = ExtResource("7_4w8nx")
 text_scene = ExtResource("3_1ahxg")
 
+[node name="DamageTimer" type="Timer" parent="." unique_id=1150949037]
+wait_time = 3.0
+one_shot = true
+
 [node name="SpeedUpTimer" type="Timer" parent="." unique_id=1399250670]
 wait_time = 10.0
 
@@ -181,6 +223,10 @@ wait_time = 0.05
 
 [node name="JumpHeightTimer" type="Timer" parent="." unique_id=2022556011]
 wait_time = 0.1
+
+[node name="InvencibleAnimation" type="AnimationPlayer" parent="." unique_id=1601904533]
+root_node = NodePath("../AnimationPlayer")
+libraries/ = SubResource("AnimationLibrary_okobp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1930398856]
 libraries/ = SubResource("AnimationLibrary_nkfg8")
@@ -222,6 +268,7 @@ collision_mask = 0
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_bnec3")
 
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="SpeedUpTimer" to="." method="_on_speed_up_timer_timeout"]
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
